@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    machine:
+      environment:
+        image: circleci/classic:latest
+    steps:
+      - checkout
+      - run:
+          name: install awscli
+          command: ./.circleci/setup.sh
+      - run:
+          name: Setup awscli
+          command: ./.circleci/aws.sh
+      - run:
+          name: install boto3
+          command: pip install boto3
+      - run:
+          name: run script
+command: python ./deploylambda.py
